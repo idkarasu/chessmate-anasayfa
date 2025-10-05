@@ -1,4 +1,4 @@
-/* cm-extras.js – v3 */
+/* cm-extras.js – v4 */
 
 (function(){
   'use strict';
@@ -18,6 +18,7 @@
   var players = {};
   var progById = {};
   var apiReady = !!(window.YT && window.YT.Player);
+  var gridObservers = [];
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 4 - YouTube API yükleme ------------------------------------------------- */
@@ -102,7 +103,15 @@
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 10 - DOM ve scroll olayları --------------------------------------------- */
-  function observeGrids(){ $all('.cm-vgrid').forEach(function(g){ new MutationObserver(function(){ wireAll() }).observe(g,{childList:true}) }) }
+  function observeGrids(){ 
+    $all('.cm-vgrid').forEach(function(g){ 
+      if(g.hasAttribute('data-observed')) return;
+      var obs = new MutationObserver(function(){ wireAll() });
+      obs.observe(g, {childList:true});
+      gridObservers.push(obs);
+      g.setAttribute('data-observed', 'true');
+    }) 
+  }
   function onScroll(){ var bt=document.getElementById('cm-backtop'); if(bt) bt.classList.toggle('show', window.scrollY>400) }
 /* Bölüm sonu --------------------------------------------------------------- */
 
