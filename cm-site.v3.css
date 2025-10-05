@@ -1,4 +1,4 @@
-/* cm-site.css – v2 */
+/* cm-site.css – v3 */
 
 /* 1 - Global reset ve WordPress düzeltmeleri ---------------------------- */
 html, body { background: var(--bg); margin: 0; min-height: 100%; }
@@ -114,50 +114,20 @@ html{scroll-behavior:smooth}
 [id]{scroll-margin-top:84px}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 14 - Mini player -------------------------------------------------------- */
-#cm-mini{
-  position:fixed;
-  right:max(16px, env(safe-area-inset-right));
-  bottom:calc(84px + env(safe-area-inset-bottom));
-  width:clamp(320px, 40vw, 520px);
-  aspect-ratio:16/9;
-  background:#000;
-  border:1px solid var(--line);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 12px 30px rgba(0,0,0,.35);
-  opacity:0; pointer-events:none; transform:scale(.96);
-  transition:opacity .2s, transform .2s; z-index:10000;
-}
-#cm-mini.show{ opacity:1; pointer-events:auto; transform:scale(1); }
-#cm-mini .cm-mini-inner{ position:relative; width:100%; height:100%; }
-#cm-mini iframe{ position:absolute; inset:0; width:100%!important; height:100%!important; border:0; border-radius:0!important; }
-
-.cm-docked{ position:absolute !important; inset:0 !important; width:100% !important; height:100% !important; border-radius:0 !important; }
-
-#cm-mini .cm-mini-close{
-  position:absolute; top:6px; right:6px; width:28px; height:28px;
-  border-radius:999px; border:1px solid var(--line);
-  background:var(--btn); color:var(--text); cursor:pointer;
-}
-
-@media (max-width:768px){ #cm-mini{ display:none !important; } }
-/* Bölüm sonu --------------------------------------------------------------- */
-
-/* 15 - Back to top butonu ------------------------------------------------- */
+/* 14 - Back to top butonu ------------------------------------------------- */
 #cm-backtop{position:fixed;right:16px;bottom:16px;width:44px;height:44px;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn);color:var(--text);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;z-index:10001;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 #cm-backtop.show{opacity:1;pointer-events:auto}
 #cm-backtop:hover{transform:translateY(-2px);background:var(--gold);color:#000;border-color:transparent}
 #cm-backtop svg{width:22px;height:22px}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 16 - Hero satırı ve CTA rozeti ------------------------------------------ */
+/* 15 - Hero satırı ve CTA rozeti ------------------------------------------ */
 .cm-hero-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
 #cm-play-cta.cm-cta--eyebrow{padding:8px 12px;border-radius:999px;font-weight:800;background:var(--gold);color:#000;border:0;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 #cm-play-cta.cm-cta--eyebrow:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.35)}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 17 - Tema düğmesi ------------------------------------------------------- */
+/* 16 - Tema düğmesi ------------------------------------------------------- */
 .cm-menu .cm-theme,.cm-menu .cm-theme-toggle,.cm-menu .cm-theme-btn,.cm-menu .cm-darklight{
   display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;
   background:var(--gold);color:#000;border:0;box-shadow:0 2px 8px rgba(0,0,0,.3);outline:2px solid transparent;outline-offset:2px;cursor:pointer
@@ -165,9 +135,4 @@ html{scroll-behavior:smooth}
 .cm-menu .cm-theme:hover,.cm-menu .cm-theme-toggle:hover,.cm-menu .cm-theme-btn:hover,.cm-menu .cm-darklight:hover{
   transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.4)
 }
-/* Bölüm sonu --------------------------------------------------------------- */
-
-/* 18 - Mini player z-index önceliği --------------------------------------- */
-#cm-mini{z-index:2147483647}
-#cm-mini .cm-mini-close{z-index:2147483647;pointer-events:auto}
 /* Bölüm sonu --------------------------------------------------------------- */
