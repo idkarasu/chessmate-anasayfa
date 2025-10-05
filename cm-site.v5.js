@@ -1,4 +1,4 @@
-/* cm-site.js — v4 */
+/* cm-site.js — v5 */
 
 (function(){
   'use strict';
@@ -7,6 +7,14 @@
   function $(sel, el){ return (el||document).querySelector(sel); }
   function $all(sel, el){ return Array.prototype.slice.call((el||document).querySelectorAll(sel)); }
   function ce(tag, cls){ var e=document.createElement(tag); if(cls) e.className=cls; return e; }
+  function debounce(fn, delay){
+    var timer;
+    return function(){
+      var args = arguments, ctx = this;
+      clearTimeout(timer);
+      timer = setTimeout(function(){ fn.apply(ctx, args) }, delay);
+    };
+  }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 2 - Yapılandırma ve metin sabitleri ------------------------------------- */
@@ -225,7 +233,8 @@
     var initLang = (new URLSearchParams(location.search).get('lang') || localStorage.getItem('cm-lang') || (CFG.defaultLang||'en')).toLowerCase();
     applyLang(initLang);
 
-    $('#cm-search').addEventListener('input', function(e){ filterCards(e.target.value); });
+    var debouncedFilter = debounce(function(val){ filterCards(val) }, 300);
+    $('#cm-search').addEventListener('input', function(e){ debouncedFilter(e.target.value); });
 
     loadAndRender();
 
