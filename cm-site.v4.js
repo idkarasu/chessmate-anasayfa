@@ -1,4 +1,4 @@
-/* cm-site.js — v3 */
+/* cm-site.js — v4 */
 
 (function(){
   'use strict';
@@ -145,7 +145,14 @@
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 7 - Kart HTML üretimi --------------------------------------------------- */
-  function esc(s){ return (s||'').replace(/</g,'&lt;'); }
+  function esc(s){ 
+    return (s||'')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#39;');
+  }
   function cardHTML(v){
     var src = 'https://www.youtube-nocookie.com/embed/'+v.id+'?modestbranding=1&rel=0';
     return ''+
@@ -178,8 +185,15 @@
     langs.forEach(function(l){
       var grid = document.querySelector('.cm-vgrid[data-lang="'+l+'"]');
       if(!grid) return;
+      
+      grid.innerHTML = '<div class="cm-loading">Loading videos...</div>';
+      
       loadJSON(map[l], function(err, arr){
-        if(err){ console.error('JSON error', l, err); return; }
+        if(err){ 
+          console.error('JSON load error for', l, err);
+          grid.innerHTML = '<div class="cm-error">Failed to load videos. <button onclick="location.reload()">Retry</button></div>';
+          return; 
+        }
         var html = (arr||[]).map(cardHTML).join('');
         grid.innerHTML = html;
       });
