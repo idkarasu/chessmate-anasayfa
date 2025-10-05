@@ -1,4 +1,4 @@
-/* cm-extras.js – v4 */
+/* cm-extras.js – v5 */
 
 (function(){
   'use strict';
@@ -19,6 +19,7 @@
   var progById = {};
   var apiReady = !!(window.YT && window.YT.Player);
   var gridObservers = [];
+  var pageVisible = !document.hidden;
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 4 - YouTube API yükleme ------------------------------------------------- */
@@ -57,6 +58,7 @@
   function startProg(id,p){
     stopProg(id);
     progById[id]=setInterval(function(){
+      if(!pageVisible) return;
       try{
         var d=p.getDuration?p.getDuration():0, c=p.getCurrentTime?p.getCurrentTime():0;
         if(d>0 && c/d>=WATCH_PCT){ var f=document.getElementById(id); addWatched(getVid(f)); stopProg(id) }
@@ -66,7 +68,16 @@
   function stopProg(id){ var t=progById[id]; if(t){clearInterval(t); delete progById[id]} }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 8 - Back to top butonu -------------------------------------------------- */
+/* 8 - Page Visibility API ------------------------------------------------- */
+  document.addEventListener('visibilitychange', function(){
+    pageVisible = !document.hidden;
+    if(!pageVisible){
+      for(var id in progById){ stopProg(id); }
+    }
+  });
+/* Bölüm sonu --------------------------------------------------------------- */
+
+/* 9 - Back to top butonu -------------------------------------------------- */
   function ensureBackTop(){
     var root=document.getElementById('cm-root')||document.body;
     if(!document.getElementById('cm-backtop')){
@@ -77,7 +88,7 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 9 - YouTube Player başlatma --------------------------------------------- */
+/* 10 - YouTube Player başlatma -------------------------------------------- */
   function initPlayers(){
     $all('.cm-thumb iframe').forEach(function(ifr){
       ensureApiParams(ifr);
@@ -102,7 +113,7 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 10 - DOM ve scroll olayları --------------------------------------------- */
+/* 11 - DOM ve scroll olayları --------------------------------------------- */
   function observeGrids(){ 
     $all('.cm-vgrid').forEach(function(g){ 
       if(g.hasAttribute('data-observed')) return;
@@ -115,14 +126,14 @@
   function onScroll(){ var bt=document.getElementById('cm-backtop'); if(bt) bt.classList.toggle('show', window.scrollY>400) }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 11 - API hazırlık ve polling -------------------------------------------- */
+/* 12 - API hazırlık ve polling -------------------------------------------- */
   var prior=window.onYouTubeIframeAPIReady;
   window.onYouTubeIframeAPIReady=function(){ apiReady=true; if(typeof prior==='function'){try{prior()}catch(_){}} initPlayers() };
   if(apiReady) setTimeout(initPlayers,0);
   var poll=setInterval(function(){ if(window.YT && window.YT.Player){ clearInterval(poll); apiReady=true; initPlayers(); } },400);
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 12 - Ana başlatma sistemi ----------------------------------------------- */
+/* 13 - Ana başlatma sistemi ----------------------------------------------- */
   function wireAll(){
     ensureBackTop(); applyWatched();
     $all('.cm-thumb iframe').forEach(ensureApiParams);
