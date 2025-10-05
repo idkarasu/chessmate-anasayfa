@@ -1,0 +1,128 @@
+<!-- anasayfa.html — v1 — ChessMate.ink Ana Sayfa -->
+
+<!-- 1 - Ana kapsayıcı ----------------------------------------------------- -->
+<section id="cm-root" class="cm-site" aria-label="ChessMate.ink"></section>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 2 - Yapılandırma scripti --------------------------------------------- -->
+<script>
+  window.CM_VER = '20250828-2';
+
+  window.CM_CONFIG = {
+    pageId: 551,
+    playUrl: "https://chessmate.ink/chess-coach-mode",
+    logo: "https://chessmate.ink/wp-content/uploads/2025/08/Untitled-image.jpeg",
+    channels: {
+      en: "https://www.youtube.com/@ChessMate-ink",
+      tr: "https://www.youtube.com/@ChessMate-ink-T%C3%BCrk%C3%A7e",
+      de: "https://www.youtube.com/@ChessMate-ink-Deutsch"
+    },
+    videosByLang: {
+      en: "/wp-content/uploads/anasayfa/videos_en.json?v=" + CM_VER,
+      tr: "/wp-content/uploads/anasayfa/videos_tr.json?v=" + CM_VER,
+      de: "/wp-content/uploads/anasayfa/videos_de.json?v=" + CM_VER
+    },
+    defaultLang: (
+      new URLSearchParams(location.search).get("lang") ||
+      localStorage.getItem("cm-lang") ||
+      "en"
+    ).toLowerCase()
+  };
+</script>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 3 - Kaynak ön yüklemeleri -------------------------------------------- -->
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.google.com">
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 4 - Stil dosyaları --------------------------------------------------- -->
+<link rel="preload" href="/wp-content/uploads/anasayfa/cm-site.css?v=2"
+      as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/wp-content/uploads/anasayfa/cm-site.css?v=2"></noscript>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 5 - JavaScript dosyaları --------------------------------------------- -->
+<script src="/wp-content/uploads/anasayfa/cm-site.js?v=2" defer></script>
+
+<script src="https://www.youtube.com/iframe_api" async></script>
+
+<script src="/wp-content/uploads/anasayfa/cm-extras.js?v=2" defer></script>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 6 - Özel stil yamaları ----------------------------------------------- -->
+<style>
+  .cm-hero-row{
+    display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px;
+  }
+  #cm-play-cta.cm-cta--eyebrow{
+    padding:8px 12px; border-radius:999px; font-weight:800;
+    background:var(--gold); color:#000; border:0;
+    box-shadow:0 2px 8px rgba(0,0,0,.25);
+  }
+  #cm-play-cta.cm-cta--eyebrow:hover{
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(0,0,0,.35);
+  }
+
+  .cm-menu .cm-theme, .cm-menu .cm-theme-toggle, .cm-menu .cm-theme-btn, .cm-menu .cm-darklight {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:50%;
+    background:var(--gold) !important; color:#000 !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.3);
+    outline:2px solid transparent; outline-offset:2px; border:0;
+    cursor:pointer;
+  }
+  .cm-menu .cm-theme:hover, .cm-menu .cm-theme-toggle:hover,
+  .cm-menu .cm-theme-btn:hover, .cm-menu .cm-darklight:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(0,0,0,.4);
+  }
+
+  .cm-mini .cm-close{
+    position:absolute; top:8px; right:8px;
+    width:28px; height:28px; border-radius:50%;
+    background: rgba(0,0,0,.7);
+    z-index:2147483647;
+    pointer-events:auto;
+  }
+  .cm-mini .cm-close::after{
+    content:"✕";
+    position:absolute; inset:0;
+    display:grid; place-items:center;
+    font-size:16px; font-weight:800;
+    color:#FFD700;
+    line-height:1;
+  }
+</style>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 7 - Hero yerleşim scripti -------------------------------------------- -->
+<script>
+  (function movePlayToHero(){
+    function run(){
+      var heroInner = document.querySelector('.cm-hero-inner');
+      var eyebrow   = document.querySelector('.cm-eyebrow');
+      var play      = document.getElementById('cm-play-cta');
+      if(!heroInner || !eyebrow || !play) return false;
+
+      var row = document.querySelector('.cm-hero-row');
+      if(!row){
+        row = document.createElement('div');
+        row.className = 'cm-hero-row';
+        heroInner.insertBefore(row, eyebrow);
+      }
+      row.appendChild(eyebrow);
+      row.appendChild(play);
+      play.classList.add('cm-cta--eyebrow');
+      return true;
+    }
+    if(!run()){
+      var tries = 0, t = setInterval(function(){
+        if(run() || ++tries>20) clearInterval(t);
+      }, 150);
+    }
+  })();
+</script>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
