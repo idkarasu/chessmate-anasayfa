@@ -1,4 +1,4 @@
-/* cm-site.css – v3 */
+/* cm-site.css – v4 */
 
 /* 1 - Global reset ve WordPress düzeltmeleri ---------------------------- */
 html, body { background: var(--bg); margin: 0; min-height: 100%; }
@@ -134,5 +134,31 @@ html{scroll-behavior:smooth}
 }
 .cm-menu .cm-theme:hover,.cm-menu .cm-theme-toggle:hover,.cm-menu .cm-theme-btn:hover,.cm-menu .cm-darklight:hover{
   transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.4)
+}
+/* Bölüm sonu --------------------------------------------------------------- */
+
+/* 17 - Loading ve Error durumları ----------------------------------------- */
+.cm-loading, .cm-error{
+  padding:40px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+.cm-error{
+  color:var(--text);
+}
+.cm-error button{
+  margin-top:12px;
+  padding:8px 16px;
+  background:var(--gold);
+  color:#000;
+  border:none;
+  border-radius:8px;
+  font-weight:700;
+  cursor:pointer;
+}
+.cm-error button:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
 }
 /* Bölüm sonu --------------------------------------------------------------- */
