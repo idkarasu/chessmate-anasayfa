@@ -1,4 +1,4 @@
-/* cm-extras.js – v7 */
+/* cm-extras.js – v8 */
 
 (function(){
   'use strict';
@@ -20,6 +20,7 @@
   var apiReady = !!(window.YT && window.YT.Player);
   var gridObservers = [];
   var pageVisible = !document.hidden;
+  var eventListeners = []; // Cleanup için event listener takibi
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 4 - YouTube API yükleme ------------------------------------------------- */
@@ -65,16 +66,33 @@
       }catch(_){}
     },1500);
   }
-  function stopProg(id){ var t=progById[id]; if(t){clearInterval(t); delete progById[id]} }
+  function stopProg(id){ 
+    var t=progById[id]; 
+    if(t){
+      clearInterval(t); 
+      delete progById[id];
+    }
+  }
+  function stopAllProg(){
+    for(var id in progById){
+      clearInterval(progById[id]);
+    }
+    progById = {};
+  }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 8 - Page Visibility API ------------------------------------------------- */
-  document.addEventListener('visibilitychange', function(){
+  function handleVisibilityChange(){
     pageVisible = !document.hidden;
     if(!pageVisible){
-      for(var id in progById){ stopProg(id); }
+      // Sayfa gizlendiğinde tüm progress tracking'i durdur
+      for(var id in progById){ 
+        stopProg(id); 
+      }
     }
-  });
+  }
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+  eventListeners.push({type: 'visibilitychange', handler: handleVisibilityChange, target: document});
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 9 - Back to top butonu -------------------------------------------------- */
@@ -123,7 +141,16 @@
       g.setAttribute('data-observed', 'true');
     }) 
   }
-  function onScroll(){ var bt=document.getElementById('cm-backtop'); if(bt) bt.classList.toggle('show', window.scrollY>400) }
+  function disconnectObservers(){
+    gridObservers.forEach(function(obs){
+      try{ obs.disconnect(); }catch(_){}
+    });
+    gridObservers = [];
+  }
+  function onScroll(){ 
+    var bt=document.getElementById('cm-backtop'); 
+    if(bt) bt.classList.toggle('show', window.scrollY>400);
+  }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 12 - API hazırlık ve polling -------------------------------------------- */
@@ -153,9 +180,44 @@
       wireAll(); observeGrids();
       window.addEventListener('scroll', onScroll, {passive:true});
       window.addEventListener('resize', onScroll);
+      eventListeners.push(
+        {type: 'scroll', handler: onScroll, target: window},
+        {type: 'resize', handler: onScroll, target: window}
+      );
     } else setTimeout(kickoff,120);
   }
   kickoff();
+/* Bölüm sonu --------------------------------------------------------------- */
+
+/* 14 - Cleanup sistemi ---------------------------------------------------- */
+  function cleanup(){
+    // 1. Tüm progress tracking interval'larını temizle
+    stopAllProg();
+    
+    // 2. Tüm MutationObserver'ları disconnect et
+    disconnectObservers();
+    
+    // 3. Event listener'ları temizle
+    eventListeners.forEach(function(item){
+      try{
+        item.target.removeEventListener(item.type, item.handler);
+      }catch(_){}
+    });
+    eventListeners = [];
+    
+    // 4. YouTube player'ları temizle
+    for(var id in players){
+      try{
+        if(players[id] && players[id].destroy){
+          players[id].destroy();
+        }
+      }catch(_){}
+    }
+    players = {};
+  }
+  
+  // Sayfa kapatılırken/yeniden yüklenirken cleanup
+  window.addEventListener('beforeunload', cleanup);
 /* Bölüm sonu --------------------------------------------------------------- */
 
 })();
