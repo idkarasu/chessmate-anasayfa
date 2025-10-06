@@ -1,4 +1,4 @@
-<!-- anasayfa.html – v8 – ChessMate.ink Ana Sayfa -->
+<!-- anasayfa.html – v15 – ChessMate.ink Ana Sayfa -->
 <!DOCTYPE html>
 <html lang="en" id="html-root">
 <head>
@@ -8,7 +8,7 @@
 
 <!-- 1 - Yapılandırma scripti --------------------------------------------- -->
 <script>
-  window.CM_VER = '20250828-8';
+  window.CM_VER = '20250828-15';
 
   window.CM_CONFIG = {
     pageId: 551,
@@ -20,9 +20,9 @@
       de: "https://www.youtube.com/@ChessMate-ink-Deutsch"
     },
     videosByLang: {
-      en: "/wp-content/uploads/anasayfa/videos_en.json?v=" + CM_VER,
-      tr: "/wp-content/uploads/anasayfa/videos_tr.json?v=" + CM_VER,
-      de: "/wp-content/uploads/anasayfa/videos_de.json?v=" + CM_VER
+      en: "/wp-content/uploads/anasayfa/videos_en.json?v=" + window.CM_VER,
+      tr: "/wp-content/uploads/anasayfa/videos_tr.json?v=" + window.CM_VER,
+      de: "/wp-content/uploads/anasayfa/videos_de.json?v=" + window.CM_VER
     },
     defaultLang: (
       new URLSearchParams(location.search).get("lang") ||
@@ -40,9 +40,9 @@
 <!-- Bölüm sonu --------------------------------------------------------------- -->
 
 <!-- 3 - Stil dosyaları --------------------------------------------------- -->
-<link rel="preload" href="/wp-content/uploads/anasayfa/cm-site.css?v=7"
+<link rel="preload" href="/wp-content/uploads/anasayfa/cm-site.css?v=15"
       as="style" onload="this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="/wp-content/uploads/anasayfa/cm-site.css?v=7"></noscript>
+<noscript><link rel="stylesheet" href="/wp-content/uploads/anasayfa/cm-site.css?v=15"></noscript>
 <!-- Bölüm sonu --------------------------------------------------------------- -->
 
 <!-- 4 - Özel stil yamaları ----------------------------------------------- -->
@@ -59,20 +59,6 @@
     transform:translateY(-1px);
     box-shadow:0 4px 12px rgba(0,0,0,.35);
   }
-
-  .cm-menu .cm-theme, .cm-menu .cm-theme-toggle, .cm-menu .cm-theme-btn, .cm-menu .cm-darklight {
-    display:inline-flex; align-items:center; justify-content:center;
-    width:28px; height:28px; border-radius:50%;
-    background:var(--gold) !important; color:#000 !important;
-    box-shadow:0 2px 8px rgba(0,0,0,.3);
-    outline:2px solid transparent; outline-offset:2px; border:0;
-    cursor:pointer;
-  }
-  .cm-menu .cm-theme:hover, .cm-menu .cm-theme-toggle:hover,
-  .cm-menu .cm-theme-btn:hover, .cm-menu .cm-darklight:hover{
-    transform:translateY(-2px);
-    box-shadow:0 4px 12px rgba(0,0,0,.4);
-  }
 </style>
 <!-- Bölüm sonu --------------------------------------------------------------- -->
 
@@ -84,9 +70,9 @@
 <!-- Bölüm sonu --------------------------------------------------------------- -->
 
 <!-- 6 - JavaScript dosyaları --------------------------------------------- -->
-<script src="/wp-content/uploads/anasayfa/cm-site.js?v=7" defer></script>
+<script src="/wp-content/uploads/anasayfa/cm-site.js?v=15" defer></script>
 <script src="https://www.youtube.com/iframe_api" async></script>
-<script src="/wp-content/uploads/anasayfa/cm-extras.js?v=8" defer></script>
+<script src="/wp-content/uploads/anasayfa/cm-extras.js?v=15" defer></script>
 <!-- Bölüm sonu --------------------------------------------------------------- -->
 
 <!-- 7 - Noscript --------------------------------------------------------- -->
