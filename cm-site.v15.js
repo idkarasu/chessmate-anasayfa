@@ -1,4 +1,4 @@
-/* cm-site.js — v7 */
+/* cm-site.js – v15 */
 
 (function(){
   'use strict';
@@ -44,7 +44,90 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 4 - Sayfa yapısı oluşturma ---------------------------------------------- */
+/* 4 - Drawer (Sidebar) yönetimi ------------------------------------------- */
+  function setupDrawer(){
+    var drawer = ce('div', 'cm-drawer');
+    drawer.id = 'cm-drawer';
+    
+    // Drawer içeriğini oluştur
+    function buildDrawerContent(){
+      var currentLang = localStorage.getItem('cm-lang') || 'en';
+      return '<div class="cm-drawer-header">'+
+        '<button id="cm-drawer-close" class="cm-drawer-close" aria-label="Close menu">&times;</button>'+
+      '</div>'+
+      '<nav class="cm-drawer-nav" aria-label="Chess Modes">'+
+        '<a href="https://chessmate.ink/?lang='+currentLang+'" class="cm-drawer-link">'+
+          '<span class="cm-drawer-icon">🏠</span>'+
+          '<span class="cm-drawer-text">Home</span>'+
+        '</a>'+
+        '<a href="https://chessmate.ink/chess-coach-mode/?lang='+currentLang+'" class="cm-drawer-link">'+
+          '<span class="cm-drawer-icon">♔</span>'+
+          '<span class="cm-drawer-text">Chess Coach Mode</span>'+
+        '</a>'+
+        '<a href="https://chessmate.ink/chess-rook-mode/?lang='+currentLang+'" class="cm-drawer-link">'+
+          '<span class="cm-drawer-icon">♖</span>'+
+          '<span class="cm-drawer-text">Chess Rook Mode</span>'+
+        '</a>'+
+        '<a href="https://chessmate.ink/chess-bishop-mode/?lang='+currentLang+'" class="cm-drawer-link">'+
+          '<span class="cm-drawer-icon">♗</span>'+
+          '<span class="cm-drawer-text">Chess Bishop Mode</span>'+
+        '</a>'+
+        '<a href="https://chessmate.ink/chess-queen-mode/?lang='+currentLang+'" class="cm-drawer-link">'+
+          '<span class="cm-drawer-icon">♕</span>'+
+          '<span class="cm-drawer-text">Chess Queen Mode</span>'+
+        '</a>'+
+        '<a href="https://chessmate.ink/chess-knight-mode/?lang='+currentLang+'" class="cm-drawer-link">'+
+          '<span class="cm-drawer-icon">♘</span>'+
+          '<span class="cm-drawer-text">Chess Knight Mode</span>'+
+        '</a>'+
+      '</nav>';
+    }
+    
+    drawer.innerHTML = buildDrawerContent();
+    
+    var overlay = ce('div', 'cm-drawer-overlay');
+    overlay.id = 'cm-drawer-overlay';
+    
+    document.body.appendChild(drawer);
+    document.body.appendChild(overlay);
+    
+    function openDrawer(){
+      // Drawer açılırken linkleri güncelle
+      drawer.innerHTML = buildDrawerContent();
+      drawer.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Close butonunu yeniden bağla
+      var closeBtn = $('#cm-drawer-close');
+      if(closeBtn){
+        closeBtn.addEventListener('click', closeDrawer);
+      }
+    }
+    
+    function closeDrawer(){
+      drawer.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    var hamburger = $('#cm-hamburger');
+    if(hamburger){
+      hamburger.addEventListener('click', openDrawer);
+    }
+    
+    overlay.addEventListener('click', closeDrawer);
+    
+    // ESC tuşu ile kapat
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && drawer.classList.contains('active')){
+        closeDrawer();
+      }
+    });
+  }
+/* Bölüm sonu --------------------------------------------------------------- */
+
+/* 5 - Sayfa yapısı oluşturma ---------------------------------------------- */
   function buildShell(root){
     var header = ce('header','cm-nav');
     header.innerHTML =
@@ -54,13 +137,17 @@
           '<span>ChessMate.ink</span>'+
         '</div>'+
         '<nav class="cm-menu" aria-label="Primary">'+
+          '<button id="cm-theme-toggle" class="cm-theme-toggle" title="Tema" aria-label="Tema">☼/☾</button>'+
           '<div class="cm-lang">'+
             '<a href="?lang=en#videos" data-lang="en" class="cm-flag" title="English" aria-label="Switch to English"><img src="https://flagcdn.com/gb.svg" alt="English flag" loading="lazy"></a>'+
             '<a href="?lang=tr#videos" data-lang="tr" class="cm-flag" title="Türkçe" aria-label="Türkçe\'ye geç"><img src="https://flagcdn.com/tr.svg" alt="Türkiye bayrağı" loading="lazy"></a>'+
             '<a href="?lang=de#videos" data-lang="de" class="cm-flag" title="Deutsch" aria-label="Zu Deutsch wechseln"><img src="https://flagcdn.com/de.svg" alt="Deutschland-Flagge" loading="lazy"></a>'+
           '</div>'+
-          '<button id="cm-theme-toggle" class="cm-theme-toggle" title="Tema" aria-label="Tema">☼/☾</button>'+
-          '<a id="cm-play-cta" class="cm-cta" href="/play/" target="_blank" rel="noopener">Play</a>'+
+          '<button id="cm-hamburger" class="cm-hamburger" aria-label="Open menu" title="Menu">'+
+            '<span></span>'+
+            '<span></span>'+
+            '<span></span>'+
+          '</button>'+
         '</nav>'+
       '</div>';
     root.appendChild(header);
@@ -107,10 +194,11 @@
     root.appendChild(footer);
 
     setupTheme($('#cm-theme-toggle', header));
+    setupDrawer();
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 5 - Dil yönetimi -------------------------------------------------------- */
+/* 6 - Dil yönetimi -------------------------------------------------------- */
   function applyLang(lc){
     var l = COPY[lc] ? lc : 'en';
     var H1 = $('#cm-hero-title'), SUB=$('#cm-hero-sub'), PLAY=$('#cm-play-cta'), SEARCH=$('#cm-search');
@@ -139,7 +227,7 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 6 - Arama filtresi ------------------------------------------------------ */
+/* 7 - Arama filtresi ------------------------------------------------------ */
   function filterCards(q){
     var lang = activeLang();
     var grid = document.querySelector('.cm-vgrid[data-lang="'+lang+'"]');
@@ -152,7 +240,7 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 7 - Kart HTML üretimi --------------------------------------------------- */
+/* 8 - Kart HTML üretimi --------------------------------------------------- */
   function esc(s){ 
     return (s||'')
       .replace(/&/g,'&amp;')
@@ -171,7 +259,7 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 8 - JSON yükleme -------------------------------------------------------- */
+/* 9 - JSON yükleme -------------------------------------------------------- */
   function loadJSON(url, cb){
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -185,7 +273,7 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 9 - Video yükleme ve render --------------------------------------------- */
+/* 10 - Video yükleme ve render --------------------------------------------- */
   function loadAndRender(){
     var map = CFG.videosByLang;
     if(!map){ return; }
@@ -209,7 +297,7 @@
   }
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 10 - Başlatma ----------------------------------------------------------- */
+/* 11 - Başlatma ----------------------------------------------------------- */
   function init(){
     if(CFG.pageId){ document.body.classList.add('page-id-'+CFG.pageId); }
     var root = document.getElementById('cm-root');
@@ -246,7 +334,7 @@
 
 })();
 
-/* 11 - Play CTA yerleştirme ----------------------------------------------- */
+/* 12 - Play CTA yerleştirme ----------------------------------------------- */
 (function movePlayToHero(){
   function run(){
     var heroInner=document.querySelector('.cm-hero-inner');
