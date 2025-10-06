@@ -1,4 +1,4 @@
-/* cm-site.css – v15 */
+/* cm-site.css – v20 */
 
 /* 1 - Global reset ve WordPress düzeltmeleri ---------------------------- */
 html, body { background: var(--bg); margin: 0; min-height: 100%; }
@@ -44,16 +44,46 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 5 - Tema toggle butonu -------------------------------------------------- */
-.cm-theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#000;border:0;box-shadow:0 2px 8px rgba(0,0,0,.3);outline:2px solid transparent;outline-offset:2px;cursor:pointer;font-size:14px;font-weight:700}
-.cm-theme-toggle:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.cm-theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:var(--btn);color:var(--text);border:1px solid var(--btn-border);cursor:pointer;font-size:14px;font-weight:700;transition:all .3s ease}
+.cm-theme-toggle:hover{background:var(--gold);color:#000;border-color:transparent;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 6 - Dil bayrakları ------------------------------------------------------ */
 .cm-lang{display:flex;gap:8px;align-items:center}
-.cm-flag{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.3);outline:2px solid transparent;outline-offset:2px;transition:.2s}
-.cm-flag:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.cm-flag.active{outline:2px solid var(--gold)}
-.cm-flag img{width:20px;height:20px;border-radius:50%;object-fit:cover;display:block}
+.cm-flag{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  min-width:38px;      /* Minimum boyut garanti */
+  min-height:38px;     /* Minimum boyut garanti */
+  background:var(--btn);
+  border:1px solid var(--btn-border);
+  border-radius:8px;
+  padding:0;
+  outline:none;
+  transition:all .3s ease;
+  flex-shrink:0;       /* Küçülmeyi engelle */
+}
+.cm-flag:hover{
+  background:var(--gold);
+  border-color:transparent;
+  transform:translateY(-1px);
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+.cm-flag.active{
+  background:var(--gold);
+  border-color:transparent;
+}
+.cm-flag img{
+  width:20px;          /* Bayrak boyutu */
+  height:20px;         /* Bayrak boyutu */
+  border-radius:3px;
+  object-fit:cover;
+  display:block;
+  pointer-events:none; /* Tıklama olaylarını engelle */
+}
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 7 - Hamburger butonu ---------------------------------------------------- */
