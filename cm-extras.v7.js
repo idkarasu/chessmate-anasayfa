@@ -1,4 +1,4 @@
-/* cm-extras.js – v5 */
+/* cm-extras.js – v7 */
 
 (function(){
   'use strict';
@@ -130,7 +130,16 @@
   var prior=window.onYouTubeIframeAPIReady;
   window.onYouTubeIframeAPIReady=function(){ apiReady=true; if(typeof prior==='function'){try{prior()}catch(_){}} initPlayers() };
   if(apiReady) setTimeout(initPlayers,0);
-  var poll=setInterval(function(){ if(window.YT && window.YT.Player){ clearInterval(poll); apiReady=true; initPlayers(); } },400);
+  var poll, pollAttempts=0, MAX_POLL=50;
+  poll=setInterval(function(){ 
+    if(window.YT && window.YT.Player || ++pollAttempts>=MAX_POLL){ 
+      clearInterval(poll); 
+      if(window.YT && window.YT.Player){
+        apiReady=true; 
+        initPlayers();
+      }
+    } 
+  },400);
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 13 - Ana başlatma sistemi ----------------------------------------------- */
