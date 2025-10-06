@@ -1,4 +1,4 @@
-/* cm-site.js — v5 */
+/* cm-site.js — v7 */
 
 (function(){
   'use strict';
