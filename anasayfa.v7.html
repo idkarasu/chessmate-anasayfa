@@ -1,0 +1,180 @@
+<!-- anasayfa.html – v7 – ChessMate.ink Ana Sayfa -->
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title id="page-title">ChessMate.ink - Everything About Chess</title>
+
+<!-- 1 - Yapılandırma scripti --------------------------------------------- -->
+<script>
+  window.CM_VER = '20250828-7';
+
+  window.CM_CONFIG = {
+    pageId: 551,
+    playUrl: "https://chessmate.ink/chess-coach-mode",
+    logo: "https://chessmate.ink/wp-content/uploads/2025/08/Untitled-image.jpeg",
+    channels: {
+      en: "https://www.youtube.com/@ChessMate-ink",
+      tr: "https://www.youtube.com/@ChessMate-ink-T%C3%BCrk%C3%A7e",
+      de: "https://www.youtube.com/@ChessMate-ink-Deutsch"
+    },
+    videosByLang: {
+      en: "/wp-content/uploads/anasayfa/videos_en.json?v=" + CM_VER,
+      tr: "/wp-content/uploads/anasayfa/videos_tr.json?v=" + CM_VER,
+      de: "/wp-content/uploads/anasayfa/videos_de.json?v=" + CM_VER
+    },
+    defaultLang: (
+      new URLSearchParams(location.search).get("lang") ||
+      localStorage.getItem("cm-lang") ||
+      "en"
+    ).toLowerCase()
+  };
+</script>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 2 - Kaynak ön yüklemeleri -------------------------------------------- -->
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.google.com">
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 3 - Stil dosyaları --------------------------------------------------- -->
+<link rel="preload" href="/wp-content/uploads/anasayfa/cm-site.css?v=7"
+      as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/wp-content/uploads/anasayfa/cm-site.css?v=7"></noscript>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 4 - Özel stil yamaları ----------------------------------------------- -->
+<style>
+  .cm-hero-row{
+    display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:10px;
+  }
+  #cm-play-cta.cm-cta--eyebrow{
+    padding:8px 12px; border-radius:999px; font-weight:800;
+    background:var(--gold); color:#000; border:0;
+    box-shadow:0 2px 8px rgba(0,0,0,.25);
+  }
+  #cm-play-cta.cm-cta--eyebrow:hover{
+    transform:translateY(-1px);
+    box-shadow:0 4px 12px rgba(0,0,0,.35);
+  }
+
+  .cm-menu .cm-theme, .cm-menu .cm-theme-toggle, .cm-menu .cm-theme-btn, .cm-menu .cm-darklight {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:28px; height:28px; border-radius:50%;
+    background:var(--gold) !important; color:#000 !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.3);
+    outline:2px solid transparent; outline-offset:2px; border:0;
+    cursor:pointer;
+  }
+  .cm-menu .cm-theme:hover, .cm-menu .cm-theme-toggle:hover,
+  .cm-menu .cm-theme-btn:hover, .cm-menu .cm-darklight:hover{
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(0,0,0,.4);
+  }
+</style>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+</head>
+<body>
+
+<!-- 5 - Ana kapsayıcı (JS tarafından doldurulur) ------------------------ -->
+<section id="cm-root" class="cm-site" aria-label="ChessMate.ink"></section>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 6 - JavaScript dosyaları --------------------------------------------- -->
+<script src="/wp-content/uploads/anasayfa/cm-site.js?v=7" defer></script>
+<script src="https://www.youtube.com/iframe_api" async></script>
+<script src="/wp-content/uploads/anasayfa/cm-extras.js?v=7" defer></script>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 7 - Noscript --------------------------------------------------------- -->
+<noscript>
+<div style="padding:20px;margin:20px;border:2px solid #ff6b6b;border-radius:8px;background:#fff2f2;color:#d63031;text-align:center;font-family:Arial,sans-serif;">
+<h2>⚠️ JavaScript Required</h2>
+<p><strong>ChessMate.ink</strong> requires JavaScript to function.</p>
+<p>Please enable JavaScript in your browser and refresh the page.</p>
+</div>
+</noscript>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+<!-- 8 - Dynamic Language System ------------------------------------------ -->
+<script>
+(function() {
+  'use strict';
+  
+  const getUrlLang = () => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const lang = params.get('lang');
+      return ['en', 'tr', 'de'].includes(lang) ? lang : 'en';
+    } catch(_) {
+      return 'en';
+    }
+  };
+  
+  const getStoredLang = () => {
+    try {
+      return localStorage.getItem('cm-lang') || 'en';
+    } catch(_) {
+      return 'en';
+    }
+  };
+  
+  const urlLang = getUrlLang();
+  const storedLang = getStoredLang();
+  const currentLang = urlLang !== 'en' ? urlLang : storedLang;
+  
+  const htmlEl = document.getElementById('html-root');
+  if (htmlEl) {
+    htmlEl.setAttribute('lang', currentLang);
+  }
+  
+  const titles = {
+    en: 'ChessMate.ink - Everything About Chess',
+    tr: 'ChessMate.ink - Satranç Hakkında Her Şey',
+    de: 'ChessMate.ink - Alles über Schach'
+  };
+  
+  const titleEl = document.getElementById('page-title');
+  if (titleEl && titles[currentLang]) {
+    titleEl.textContent = titles[currentLang];
+  }
+  
+  const noscriptTranslations = {
+    en: {
+      title: '⚠️ JavaScript Required',
+      desc: '<strong>ChessMate.ink</strong> requires JavaScript to function.',
+      help: 'Please enable JavaScript in your browser and refresh the page.'
+    },
+    tr: {
+      title: '⚠️ JavaScript Gerekli',
+      desc: '<strong>ChessMate.ink</strong> uygulaması çalışması için JavaScript\'in etkin olması gerekiyor.',
+      help: 'Lütfen tarayıcınızdan JavaScript\'i etkinleştirip sayfayı yenileyin.'
+    },
+    de: {
+      title: '⚠️ JavaScript Erforderlich',
+      desc: '<strong>ChessMate.ink</strong> benötigt JavaScript zum Funktionieren.',
+      help: 'Bitte aktivieren Sie JavaScript in Ihrem Browser und laden Sie die Seite neu.'
+    }
+  };
+  
+  const noscript = document.querySelector('noscript div');
+  if (noscript && noscriptTranslations[currentLang]) {
+    const trans = noscriptTranslations[currentLang];
+    noscript.innerHTML = `
+      <h2>${trans.title}</h2>
+      <p>${trans.desc}</p>
+      <p>${trans.help}</p>
+    `;
+  }
+  
+  window.CM_INITIAL_LANG = currentLang;
+  
+})();
+</script>
+<!-- Bölüm sonu --------------------------------------------------------------- -->
+
+</body>
+</html>
