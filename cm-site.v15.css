@@ -1,4 +1,4 @@
-/* cm-site.css – v7 */
+/* cm-site.css – v15 */
 
 /* 1 - Global reset ve WordPress düzeltmeleri ---------------------------- */
 html, body { background: var(--bg); margin: 0; min-height: 100%; }
@@ -44,9 +44,8 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 5 - Tema toggle butonu -------------------------------------------------- */
-.cm-theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn);cursor:pointer;color:var(--text)}
-.cm-theme-toggle:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.25);background:var(--gold);color:#000;border-color:transparent}
-.cm-theme-toggle svg{width:18px;height:18px;display:block}
+.cm-theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#000;border:0;box-shadow:0 2px 8px rgba(0,0,0,.3);outline:2px solid transparent;outline-offset:2px;cursor:pointer;font-size:14px;font-weight:700}
+.cm-theme-toggle:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.4)}
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 6 - Dil bayrakları ------------------------------------------------------ */
@@ -57,7 +56,33 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 .cm-flag img{width:20px;height:20px;border-radius:50%;object-fit:cover;display:block}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 7 - Hero bölümü --------------------------------------------------------- */
+/* 7 - Hamburger butonu ---------------------------------------------------- */
+.cm-hamburger{display:inline-flex;flex-direction:column;justify-content:center;align-items:center;width:38px;height:38px;background:var(--btn);border:1px solid var(--btn-border);border-radius:8px;cursor:pointer;gap:4px;padding:0;transition:all .3s ease}
+.cm-hamburger span{width:20px;height:2px;background:var(--text);border-radius:2px;transition:all .3s ease}
+.cm-hamburger:hover{background:var(--gold);border-color:transparent;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.cm-hamburger:hover span{background:#000}
+/* Bölüm sonu --------------------------------------------------------------- */
+
+/* 8 - Drawer (Sidebar) ---------------------------------------------------- */
+.cm-drawer{position:fixed;top:0;right:-320px;width:320px;height:100vh;background:var(--panel);border-left:1px solid var(--line);z-index:9999;transition:right .3s cubic-bezier(0.4, 0, 0.2, 1);overflow-y:auto;box-shadow:0 0 0 rgba(0,0,0,0)}
+.cm-drawer.active{right:0;box-shadow:-8px 0 24px rgba(0,0,0,.4)}
+.cm-drawer-header{display:flex;justify-content:flex-end;padding:16px;border-bottom:1px solid var(--line)}
+.cm-drawer-close{width:36px;height:36px;border-radius:50%;background:var(--btn);border:1px solid var(--btn-border);color:var(--text);font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s ease}
+.cm-drawer-close:hover{background:var(--gold);color:#000;border-color:transparent;transform:rotate(90deg)}
+.cm-drawer-nav{display:flex;flex-direction:column;padding:12px}
+.cm-drawer-link{display:flex;align-items:center;gap:16px;padding:16px;border-radius:12px;background:var(--btn);border:1px solid var(--btn-border);text-decoration:none;color:var(--text);margin-bottom:12px;transition:all .2s ease}
+.cm-drawer-link:hover{background:var(--gold);color:#000;border-color:transparent;transform:translateX(-4px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.cm-drawer-icon{font-size:24px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:color-mix(in oklab, var(--gold), transparent 85%);border-radius:8px}
+.cm-drawer-link:hover .cm-drawer-icon{background:rgba(0,0,0,.15)}
+.cm-drawer-text{font-weight:700;font-size:14px}
+/* Bölüm sonu --------------------------------------------------------------- */
+
+/* 9 - Drawer Overlay ------------------------------------------------------ */
+.cm-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;opacity:0;pointer-events:none;transition:opacity .3s ease;backdrop-filter:blur(2px)}
+.cm-drawer-overlay.active{opacity:1;pointer-events:auto}
+/* Bölüm sonu --------------------------------------------------------------- */
+
+/* 10 - Hero bölümü --------------------------------------------------------- */
 .cm-hero{--sq:color-mix(in oklab, var(--bg), #000 8%);background:linear-gradient(180deg,color-mix(in oklab,var(--bg),transparent 85%),color-mix(in oklab,#000,transparent 75%)),repeating-linear-gradient(45deg,var(--sq) 0 22px,color-mix(in oklab,var(--bg),#000 12%) 22px 44px);border-bottom:1px solid var(--line)}
 .cm-hero-inner{padding:56px 0}
 .cm-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#000;padding:6px 10px;border-radius:999px;font-weight:800}
@@ -65,13 +90,13 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 .cm-hero-sub{color:var(--muted);max-width:70ch;margin:0}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 8 - Arama çubuğu -------------------------------------------------------- */
+/* 11 - Arama çubuğu -------------------------------------------------------- */
 .cm-searchbar{display:flex;justify-content:center;gap:8px;padding:12px}
 .cm-search{width:100%;max-width:640px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--text);outline:none}
 .cm-search:focus{border-color:color-mix(in oklab, var(--line), var(--gold) 40%);box-shadow:0 0 0 3px color-mix(in oklab, var(--gold), transparent 85%)}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 9 - Sekmeler ------------------------------------------------------------ */
+/* 12 - Sekmeler ------------------------------------------------------------ */
 .cm-tabs{border:1px solid var(--line);border-radius:18px;background:var(--panel);margin:12px 0 28px}
 .cm-tabbar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:12px;border-bottom:1px solid var(--line)}
 .cm-tabbar label{padding:10px 16px;border:1px solid var(--line);border-radius:999px;cursor:pointer;color:var(--muted);user-select:none;font-weight:700;background:var(--btn);transition:transform .18s ease, box-shadow .22s ease}
@@ -82,12 +107,17 @@ input[name="cm-lang"]{position:absolute;left:-9999px;visibility:hidden}
 #cm-en:checked ~ .cm-tabs label[for="cm-en"], #cm-tr:checked ~ .cm-tabs label[for="cm-tr"], #cm-de:checked ~ .cm-tabs label[for="cm-de"]{background:var(--gold);color:#000;border-color:transparent;box-shadow:0 6px 22px rgba(255,215,0,.25);transform:translateY(-1px)}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 10 - Video grid --------------------------------------------------------- */
+/* 13 - Video grid --------------------------------------------------------- */
 .cm-vgrid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-@media (max-width:720px){ .cm-vgrid{grid-template-columns:1fr} .cm-tabpanel{padding:12px} .cm-hero-inner{padding:40px 0} }
+@media (max-width:720px){ 
+  .cm-vgrid{grid-template-columns:1fr} 
+  .cm-tabpanel{padding:12px} 
+  .cm-hero-inner{padding:40px 0}
+  .cm-drawer{width:280px;right:-280px}
+}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 11 - Video kartları ----------------------------------------------------- */
+/* 14 - Video kartları ----------------------------------------------------- */
 .cm-card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .18s, box-shadow .22s, border-color .22s}
 .cm-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.20);border-color:color-mix(in oklab, var(--line), var(--text) 15%)}
 .cm-card.watched::after{content:"✓";position:absolute;top:8px;left:8px;width:24px;height:24px;border-radius:999px;background:var(--gold);color:#000;display:flex;align-items:center;justify-content:center;font-weight:900;box-shadow:0 2px 10px rgba(0,0,0,.3)}
@@ -98,7 +128,7 @@ input[name="cm-lang"]{position:absolute;left:-9999px;visibility:hidden}
 .cm-body p{margin:0;color:var(--muted);font-size:13px}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 12 - Footer ------------------------------------------------------------- */
+/* 15 - Footer ------------------------------------------------------------- */
 .cm-footer{border-top:1px solid var(--line);background:var(--panel);margin-top:28px}
 .cm-footer .cm-container{padding:24px 5%}
 .cm-social{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:8px 0 12px}
@@ -109,35 +139,25 @@ input[name="cm-lang"]{position:absolute;left:-9999px;visibility:hidden}
 .cm-copy{color:var(--muted);font-size:13px;margin:0;text-align:center}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 13 - Scroll davranışı --------------------------------------------------- */
+/* 16 - Scroll davranışı --------------------------------------------------- */
 html{scroll-behavior:smooth}
 [id]{scroll-margin-top:84px}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 14 - Back to top butonu ------------------------------------------------- */
+/* 17 - Back to top butonu ------------------------------------------------- */
 #cm-backtop{position:fixed;right:16px;bottom:16px;width:44px;height:44px;border-radius:999px;border:1px solid var(--btn-border);background:var(--btn);color:var(--text);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s, transform .2s;z-index:10001;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 #cm-backtop.show{opacity:1;pointer-events:auto}
 #cm-backtop:hover{transform:translateY(-2px);background:var(--gold);color:#000;border-color:transparent}
 #cm-backtop svg{width:22px;height:22px}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 15 - Hero satırı ve CTA rozeti ------------------------------------------ */
+/* 18 - Hero satırı ve CTA rozeti ------------------------------------------ */
 .cm-hero-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
 #cm-play-cta.cm-cta--eyebrow{padding:8px 12px;border-radius:999px;font-weight:800;background:var(--gold);color:#000;border:0;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 #cm-play-cta.cm-cta--eyebrow:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.35)}
 /* Bölüm sonu --------------------------------------------------------------- */
 
-/* 16 - Tema düğmesi ------------------------------------------------------- */
-.cm-menu .cm-theme,.cm-menu .cm-theme-toggle,.cm-menu .cm-theme-btn,.cm-menu .cm-darklight{
-  display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;
-  background:var(--gold);color:#000;border:0;box-shadow:0 2px 8px rgba(0,0,0,.3);outline:2px solid transparent;outline-offset:2px;cursor:pointer
-}
-.cm-menu .cm-theme:hover,.cm-menu .cm-theme-toggle:hover,.cm-menu .cm-theme-btn:hover,.cm-menu .cm-darklight:hover{
-  transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.4)
-}
-/* Bölüm sonu --------------------------------------------------------------- */
-
-/* 17 - Loading ve Error durumları ----------------------------------------- */
+/* 19 - Loading ve Error durumları ----------------------------------------- */
 .cm-loading, .cm-error{
   padding:40px 20px;
   text-align:center;
