@@ -1,4 +1,4 @@
-/* cm-site.css – v20 */
+/* cm-site.css – v21 */
 
 /* 1 - Global reset ve WordPress düzeltmeleri ---------------------------- */
 html, body { background: var(--bg); margin: 0; min-height: 100%; }
@@ -44,7 +44,20 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 5 - Tema toggle butonu -------------------------------------------------- */
-.cm-theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:8px;background:var(--btn);color:var(--text);border:1px solid var(--btn-border);cursor:pointer;font-size:14px;font-weight:700;transition:all .3s ease}
+.cm-theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  border-radius:8px;
+  background:var(--btn);
+  color:var(--text);
+  border:1px solid var(--btn-border);
+  cursor:pointer;
+  font-size:18px;    /* Emoji boyutu */
+  transition:all .3s ease;
+}
 .cm-theme-toggle:hover{background:var(--gold);color:#000;border-color:transparent;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
 /* Bölüm sonu --------------------------------------------------------------- */
 
@@ -54,17 +67,21 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  width:38px;
-  height:38px;
-  min-width:38px;      /* Minimum boyut garanti */
-  min-height:38px;     /* Minimum boyut garanti */
+  width:38px !important;
+  height:38px !important;
+  min-width:38px;
+  min-height:38px;
+  max-width:38px;          /* YENI: Maksimum boyut */
+  max-height:38px;         /* YENI: Maksimum boyut */
   background:var(--btn);
   border:1px solid var(--btn-border);
   border-radius:8px;
-  padding:0;
+  padding:0 !important;    /* YENI: !important ekledim */
+  margin:0;                /* YENI: Margin sıfır */
   outline:none;
   transition:all .3s ease;
-  flex-shrink:0;       /* Küçülmeyi engelle */
+  flex-shrink:0;
+  box-sizing:border-box;   /* YENI: Border dahil hesapla */
 }
 .cm-flag:hover{
   background:var(--gold);
@@ -77,12 +94,16 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
   border-color:transparent;
 }
 .cm-flag img{
-  width:20px;          /* Bayrak boyutu */
-  height:20px;         /* Bayrak boyutu */
+  width:20px !important;   /* YENI: !important */
+  height:20px !important;  /* YENI: !important */
+  max-width:20px;          /* YENI: Maksimum */
+  max-height:20px;         /* YENI: Maksimum */
   border-radius:3px;
   object-fit:cover;
   display:block;
-  pointer-events:none; /* Tıklama olaylarını engelle */
+  pointer-events:none;
+  margin:0;                /* YENI: Margin sıfır */
+  padding:0;               /* YENI: Padding sıfır */
 }
 /* Bölüm sonu --------------------------------------------------------------- */
 
