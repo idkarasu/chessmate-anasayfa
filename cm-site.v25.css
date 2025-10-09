@@ -1,4 +1,4 @@
-/* cm-site.css – v24 */
+/* cm-site.css – v25 */
 
 /* 1 - Global reset ve WordPress düzeltmeleri ---------------------------- */
 html, body { background: var(--bg); margin: 0; min-height: 100%; }
@@ -140,13 +140,13 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 10 - Hero bölümü --------------------------------------------------------- */
-.cm-hero{padding:0 5%}
+.cm-hero{padding:12px 5% 0}
 .cm-hero-inner{
   --sq:color-mix(in oklab, var(--bg), #000 8%);
   background:linear-gradient(180deg,color-mix(in oklab,var(--bg),transparent 85%),color-mix(in oklab,#000,transparent 75%)),repeating-linear-gradient(45deg,var(--sq) 0 22px,color-mix(in oklab,var(--bg),#000 12%) 22px 44px);
   padding:56px 5%;
   max-width:1200px;
-  margin:0 auto 28px;
+  margin:0 auto 12px;
   border:1px solid var(--line);
   border-radius:18px;
 }
@@ -155,7 +155,7 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 .cm-hero-sub{color:var(--muted);max-width:70ch;margin:0}
 
 @media (max-width:720px){
-  .cm-hero{padding:0 3%}
+  .cm-hero{padding:12px 3% 0}
   .cm-hero-inner{padding:32px 24px}
 }
 /* Bölüm sonu --------------------------------------------------------------- */
