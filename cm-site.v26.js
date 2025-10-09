@@ -1,4 +1,4 @@
-/* cm-site.js – v25 */
+/* cm-site.js – v26 */
 
 (function(){
   'use strict';
@@ -20,9 +20,9 @@
 /* 2 - Yapılandırma ve metin sabitleri ------------------------------------- */
   var CFG = window.CM_CONFIG || {};
   var COPY = {
-    en:{ title:"Everything about chess", sub:"Rules, piece moves, strategy and chess history – clear, multilingual, well-structured lessons.", cta:"Play", search:"Search videos..." },
-    tr:{ title:"Satranç hakkında her şey", sub:"Kurallar, taşların hareketleri, strateji ve satranç tarihi – sade, çok dilli ve düzenli derslerle.", cta:"Oyna", search:"Videolarda ara..." },
-    de:{ title:"Alles über Schach", sub:"Regeln, Figurenbewegungen, Strategie und Schachgeschichte – klar, mehrsprachig, in geordneten Lektionen.", cta:"Spielen", search:"Videos durchsuchen..." }
+    en:{ title:"Everything about chess", sub:"From beginner to master – comprehensive, free, multilingual chess education.", cta:"Play", search:"Search videos..." },
+    tr:{ title:"Satranç hakkında her şey", sub:"Yeni başlayandan ustaya – kapsamlı, ücretsiz, çok dilli satranç eğitimi.", cta:"Oyna", search:"Videolarda ara..." },
+    de:{ title:"Alles über Schach", sub:"Vom Anfänger zum Meister – umfassende, kostenlose, mehrsprachige Schachausbildung.", cta:"Spielen", search:"Videos durchsuchen..." }
   };
 /* Bölüm sonu --------------------------------------------------------------- */
 
