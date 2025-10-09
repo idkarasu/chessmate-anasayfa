@@ -1,4 +1,4 @@
-/* cm-site.js – v24 */
+/* cm-site.js – v25 */
 
 (function(){
   'use strict';
@@ -45,8 +45,9 @@
         currentTheme = prefersDark ? 'dark' : 'light';
       }
       
-      // Dark mode'dayken güneş, light mode'dayken ay göster
-      btn.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+      // Dark mode'daysa güneş göster (light'a geçmek için)
+      // Light mode'daysa ay göster (dark'a geçmek için)
+      btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
     }
     
     var saved = localStorage.getItem('cm-theme');
@@ -54,8 +55,9 @@
     
     btn.onclick = function(){
       var cur = localStorage.getItem('cm-theme');
-      var next = cur==='light' ? 'dark' : (cur==='dark' ? null : 'light');
-      if(next) localStorage.setItem('cm-theme', next); else localStorage.removeItem('cm-theme');
+      // Basit toggle: dark ↔ light (sistem modu kullanma)
+      var next = cur === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('cm-theme', next);
       apply(next);
     };
   }
