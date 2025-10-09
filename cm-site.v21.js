@@ -1,4 +1,4 @@
-/* cm-site.js – v20 */
+/* cm-site.js – v21 */
 
 (function(){
   'use strict';
@@ -32,9 +32,26 @@
       var root=document.documentElement;
       if(theme){ root.setAttribute('data-theme', theme); }
       else{ root.removeAttribute('data-theme'); }
+      updateThemeIcon(btn, theme);
     }
+    
+    function updateThemeIcon(btn, theme){
+      // Mevcut tema: null (sistem), 'light', veya 'dark'
+      var currentTheme = theme;
+      
+      // Sistem temasını kontrol et
+      if(!currentTheme){
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        currentTheme = prefersDark ? 'dark' : 'light';
+      }
+      
+      // Dark mode'dayken güneş, light mode'dayken ay göster
+      btn.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+    }
+    
     var saved = localStorage.getItem('cm-theme');
     apply(saved);
+    
     btn.onclick = function(){
       var cur = localStorage.getItem('cm-theme');
       var next = cur==='light' ? 'dark' : (cur==='dark' ? null : 'light');
@@ -137,7 +154,7 @@
           '<span>ChessMate.ink</span>'+
         '</div>'+
         '<nav class="cm-menu" aria-label="Primary">'+
-          '<button id="cm-theme-toggle" class="cm-theme-toggle" title="Tema" aria-label="Tema">☼/☾</button>'+
+          '<button id="cm-theme-toggle" class="cm-theme-toggle" title="Tema" aria-label="Tema">🌙</button>'+
           '<div class="cm-lang">'+
             '<a href="?lang=en#videos" data-lang="en" class="cm-flag" title="English" aria-label="Switch to English"><img src="https://flagcdn.com/gb.svg" alt="English flag" loading="lazy"></a>'+
             '<a href="?lang=tr#videos" data-lang="tr" class="cm-flag" title="Türkçe" aria-label="Türkçe\'ye geç"><img src="https://flagcdn.com/tr.svg" alt="Türkiye bayrağı" loading="lazy"></a>'+
