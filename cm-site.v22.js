@@ -1,4 +1,4 @@
-/* cm-site.js – v21 */
+/* cm-site.js – v22 */
 
 (function(){
   'use strict';
@@ -151,7 +151,7 @@
       '<div class="cm-container cm-nav-inner">'+
         '<div class="cm-brand">'+
           '<img src="'+(CFG.logo||'')+'" alt="ChessMate.ink logo" class="cm-logo-img"/>'+
-          '<span>ChessMate.ink</span>'+
+          '<span>Chess<br class="cm-brand-break">Mate.ink</span>'+
         '</div>'+
         '<nav class="cm-menu" aria-label="Primary">'+
           '<button id="cm-theme-toggle" class="cm-theme-toggle" title="Tema" aria-label="Tema">🌙</button>'+
