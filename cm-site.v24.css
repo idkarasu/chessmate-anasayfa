@@ -1,4 +1,4 @@
-/* cm-site.css – v22 */
+/* cm-site.css – v24 */
 
 /* 1 - Global reset ve WordPress düzeltmeleri ---------------------------- */
 html, body { background: var(--bg); margin: 0; min-height: 100%; }
@@ -140,11 +140,24 @@ body.page-id-536 .wp-block-custom-html{ margin:0!important; }
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 10 - Hero bölümü --------------------------------------------------------- */
-.cm-hero{--sq:color-mix(in oklab, var(--bg), #000 8%);background:linear-gradient(180deg,color-mix(in oklab,var(--bg),transparent 85%),color-mix(in oklab,#000,transparent 75%)),repeating-linear-gradient(45deg,var(--sq) 0 22px,color-mix(in oklab,var(--bg),#000 12%) 22px 44px);border-bottom:1px solid var(--line)}
-.cm-hero-inner{padding:56px 0}
+.cm-hero{padding:0 5%}
+.cm-hero-inner{
+  --sq:color-mix(in oklab, var(--bg), #000 8%);
+  background:linear-gradient(180deg,color-mix(in oklab,var(--bg),transparent 85%),color-mix(in oklab,#000,transparent 75%)),repeating-linear-gradient(45deg,var(--sq) 0 22px,color-mix(in oklab,var(--bg),#000 12%) 22px 44px);
+  padding:56px 5%;
+  max-width:1200px;
+  margin:0 auto 28px;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
 .cm-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#000;padding:6px 10px;border-radius:999px;font-weight:800}
 .cm-h1{font-size:clamp(28px,4vw,44px);margin:12px 0 8px;line-height:1.15;font-weight:800;color:var(--text);text-shadow:0 1px 2px rgba(0,0,0,.25)}
 .cm-hero-sub{color:var(--muted);max-width:70ch;margin:0}
+
+@media (max-width:720px){
+  .cm-hero{padding:0 3%}
+  .cm-hero-inner{padding:32px 24px}
+}
 /* Bölüm sonu --------------------------------------------------------------- */
 
 /* 11 - Arama çubuğu -------------------------------------------------------- */
@@ -169,7 +182,6 @@ input[name="cm-lang"]{position:absolute;left:-9999px;visibility:hidden}
 @media (max-width:720px){ 
   .cm-vgrid{grid-template-columns:1fr} 
   .cm-tabpanel{padding:12px} 
-  .cm-hero-inner{padding:40px 0}
   .cm-drawer{width:280px;right:-280px}
 }
 /* Bölüm sonu --------------------------------------------------------------- */
