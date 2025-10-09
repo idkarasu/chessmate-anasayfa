@@ -1,4 +1,4 @@
-/* cm-extras.js – v20 */
+/* cm-extras.js – v21 */
 
 (function(){
   'use strict';
