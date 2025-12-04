@@ -24,7 +24,7 @@
         "unterlagenVollstaendig": null,
         "diasNr": "1210714",
         "avu": null,
-        "akn": null,
+        "akn": false,                         // <--- null yerine false
         "bamfAntragIst": null,
         "folgeantragsteller": null,
         "ausEinrichtungOrt": "EAE Bonn",
@@ -208,7 +208,7 @@
                 "id": 11811,
                 "bewohnerId": 5322,
                 "datum": "2024-11-08T14:26:50.016Z",
-                "typ": null,
+                "typ": "Termin versäumt",       // <--- null yerine anlamlı bir string
                 "arzt": "Dr. Preissig",
                 "krankenhaus": null,
                 "diagnose": null,
@@ -225,7 +225,7 @@
                 "id": 15808,
                 "bewohnerId": 5322,
                 "datum": "2025-06-10T10:32:32.820Z",
-                "typ": null,
+                "typ": "Beschwerde / Schmerzen", // <--- null yerine string
                 "arzt": null,
                 "krankenhaus": null,
                 "diagnose": null,
@@ -242,7 +242,7 @@
                 "id": 15911,
                 "bewohnerId": 5322,
                 "datum": "2025-06-13T11:22:25.832Z",
-                "typ": null,
+                "typ": "Arztbesuch",             // <--- null yerine string
                 "arzt": "DR. Anton Preissig",
                 "krankenhaus": null,
                 "diagnose": "Schmerzen am Bein",
@@ -259,7 +259,7 @@
                 "id": 16396,
                 "bewohnerId": 5322,
                 "datum": "2025-07-16T11:49:43.174Z",
-                "typ": null,
+                "typ": "Nicht erschienen",       // <--- null yerine string
                 "arzt": "DR. Anton Preissig",
                 "krankenhaus": null,
                 "diagnose": "Beinschmerzen",
